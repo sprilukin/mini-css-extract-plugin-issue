@@ -2,24 +2,12 @@ const path = require("path");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    devtool: 'source-map',
-
     resolve: {
-        modules: [path.resolve(process.cwd(), 'node_modules')],
-        extensions: ['.ts', '.tsx', '.js', '.jsx']
+        modules: [path.resolve(process.cwd(), 'node_modules')]
     },
 
     module: {
         rules: [
-            //use babel loader to transpile sources
-            {
-                test: /\.(js|jsx|tsx|ts)$/,
-                enforce: 'pre',
-                exclude: /node_modules/,
-                use: [
-                    {loader: 'babel-loader'}
-                ]
-            },
             // file loader allows to copy file to the build folder and form proper url
             // usually images are used from css files, see css loader below
             {
@@ -71,12 +59,6 @@ module.exports = {
         path: path.resolve(process.cwd(), `public`),
         publicPath: '',
         filename: '[name].js',
-        chunkFilename: '_chunks/chunk.[name].js',
-        chunkLoadTimeout: 60000,
-
-        library: 'test',
-        libraryTarget: 'umd',
-        libraryExport: 'default'
-    },
-    watch: false
+        chunkFilename: '_chunks/chunk.[name].js'
+    }
 };
